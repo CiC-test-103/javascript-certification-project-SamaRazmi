@@ -1,22 +1,10 @@
-/**
- * Create a Student Class
- * The class should have the private fields:
- * - name, year, email, specialization
- * The class should have means to modify these fields
- * The class should have means to access these fields
- */
 class Student {
   // Private Fields
-  #name               // String(fullname no space in between)
-  #year               // Number
-  #email              // String
-  #specialization     // String(must be written in camelCase)
+  #name;
+  #year;
+  #email;
+  #specialization;
 
-  /**
-   * REQUIRES:  The fields specified above
-   * EFFECTS:   Creates a new Student instance
-   * RETURNS:   None
-   */
   constructor(name, year, email, specialization) {
     this.#name = name;
     this.#year = year;
@@ -24,68 +12,53 @@ class Student {
     this.#specialization = specialization;
   }
 
-  /**
-   * REQUIRES:  None
-   * EFFECTS:   None
-   * RETURNS:   The student name (String)
-   */
+  // Getter methods
   getName() {
     return this.#name;
   }
 
-  /**
-   * REQUIRES:  None
-   * EFFECTS:   None
-   * RETURNS:   The student year (Number)
-   */
   getYear() {
     return this.#year;
   }
 
-  /**
-   * REQUIRES:  None
-   * EFFECTS:   None
-   * RETURNS:   The student email (String)
-   */
   getEmail() {
     return this.#email;
   }
 
-  /**
-   * REQUIRES:  None
-   * EFFECTS:   None
-   * RETURNS:   The student specialization (String)
-   */
   getSpecialization() {
-    return this.#specialization; 
+    return this.#specialization;
   }
 
-  /**
-   * REQUIRES:  None
-   * EFFECTS:   None
-   * RETURNS:   Student object as string
-   */
+  // String representation
   getString() {
-    return `Name: ${this.#name}, Year: ${this.#year}, Email: ${this.#email}, Specialization: ${this.#specialization}`;
+    return `Name: ${this.#name}, Year: ${this.#year}, Email: ${
+      this.#email
+    }, Specialization: ${this.#specialization}`;
   }
 
-  /**
-   * REQUIRES:  The student's new email (String)
-   * EFFECTS:   Modifies the student's email to match
-   * RETURNS:   None
-   */
+  // Setter methods
   setEmail(newEmail) {
     this.#email = newEmail;
   }
 
-  /**
-   * REQUIRES:  The student's new specialization (String)
-   * EFFECTS:   Modifies the student's specialization to match
-   * RETURNS:   The student specialization (String)
-   */
   setSpecialization(newSpecialization) {
     this.#specialization = newSpecialization;
   }
+
+  // Custom serialization for private fields
+  toJSON() {
+    return {
+      name: this.#name,
+      year: this.#year,
+      email: this.#email,
+      specialization: this.#specialization,
+    };
+  }
+
+  // Custom deserialization for private fields
+  static fromJSON(json) {
+    return new Student(json.name, json.year, json.email, json.specialization);
+  }
 }
 
-module.exports = { Student }
+module.exports = { Student };
